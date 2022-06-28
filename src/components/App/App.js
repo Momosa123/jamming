@@ -9,8 +9,15 @@ export class App extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      searchResults:[]
-    }
+      searchResults:[],
+      playlistName: 'My playlist',
+      playlistTracks:['X gonna give it to you','I am DMX', 'This is how we do']
+    };
+    this.addTrack = this.addTrack.bind(this)
+  }
+  addTrack(track){
+    if (this.state.playlistTracks.every(playlistTrack =>playlistTrack.id !== track.id))
+    this.setState(prevState =>({...prevState, playlistTracks: prevState.playlistTracks.concat(track)}))
   }
  render()
  { return (
@@ -19,8 +26,11 @@ export class App extends React.Component {
       <div className="App">
         <SearchBar/>
         <div className="App-playlist">
-          <SearchResults searchResults={this.state.searchResults} />
-          <Playlist/>
+          <SearchResults addTrack={this.addTrack} searchResults={this.state.searchResults} />
+          <Playlist 
+          playlistName={this.state.playlistName}
+          playlistTracks={this.state.playlistTracks}
+          />
         </div>
       </div>
   </div>
