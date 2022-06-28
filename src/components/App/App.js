@@ -14,10 +14,14 @@ export class App extends React.Component {
       playlistTracks:['X gonna give it to you','I am DMX', 'This is how we do']
     };
     this.addTrack = this.addTrack.bind(this)
+    this.removeTrack = this.removeTrack.bind(this)
   }
   addTrack(track){
     if (this.state.playlistTracks.every(playlistTrack =>playlistTrack.id !== track.id))
     this.setState(prevState =>({...prevState, playlistTracks: prevState.playlistTracks.concat(track)}))
+  }
+  removeTrack(track){
+       this.setState(prevState =>prevState.filter(playlistTrack => playlistTrack.id !== track.id))
   }
  render()
  { return (
@@ -27,7 +31,8 @@ export class App extends React.Component {
         <SearchBar/>
         <div className="App-playlist">
           <SearchResults addTrack={this.addTrack} searchResults={this.state.searchResults} />
-          <Playlist 
+          <Playlist
+          onRemove ={this.removeTrack} 
           playlistName={this.state.playlistName}
           playlistTracks={this.state.playlistTracks}
           />
