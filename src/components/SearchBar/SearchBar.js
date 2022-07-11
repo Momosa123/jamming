@@ -8,11 +8,12 @@ export class SearchBar extends React.Component{
       term:''
     }
     this.search = this.search.bind(this)
+    this.handleTermChange = this.handleTermChange.bind(this)
   }
   handleTermChange(e){
     const newTerm = e.target.value
-    this.setState(prevState => ({...prevState, term: newTerm}))
-    this.search()
+    this.setState({ term: newTerm})
+    
   }
   search(){
     
