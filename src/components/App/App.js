@@ -22,12 +22,23 @@ export class App extends React.Component {
   }
 
   addTrack(track){
-    if (this.state.playlistTracks.every(playlistTrack =>playlistTrack.id !== track.id))
-    this.setState(prevState =>({...prevState, playlistTracks: prevState.playlistTracks.concat(track)}))
+    
+    const tracks = this.state.playlistTracks
+    console.log(tracks)
+    console.log(track)
+    // if (tracks.every(playlistTrack =>playlistTrack.id !== track.id))
+    // this.setState(prevState =>({...prevState, playlistTracks: prevState.playlistTracks.concat(track)}))
+    if(tracks.find(savedTrack => savedTrack.ID === track.ID))
+    {return}
+    console.log('we are here')
+    tracks.push(track)
+    this.setState({
+      playlistTracks: tracks
+    })
   }
 
   removeTrack(track){
-       this.setState(prevState =>prevState.filter(playlistTrack => playlistTrack.id !== track.id))
+       this.setState(prevState =>prevState.filter.playlistTracks(playlistTrack => playlistTrack.ID !== track.ID))
   }
 
   updatePlaylistName(name){
@@ -35,8 +46,9 @@ export class App extends React.Component {
   }
 
   savePlaylist(){
-    const trackUris = this.playlistTracks.map(playlistTrack => playlistTrack.uri)
-    Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => ({
+    const trackUris = this.state.playlistTracks.map(playlistTrack => playlistTrack.URI)
+    console.log(trackUris.length)
+    Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => this.setState({
       playlistName: 'New Playlist',
       playlistTracks: []
     }))

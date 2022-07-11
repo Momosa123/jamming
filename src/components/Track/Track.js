@@ -19,8 +19,8 @@ removeTrack(e){
 render ()
  {return ( <div className="Track">
  <div className="Track-information">
-   <h3>{this.props.track.name}</h3>
-   <p> {this.props.track.artist} <br/>  {this.props.album}</p>
+   <h3>{this.props.track.Name}</h3>
+   <p> {this.props.track.Artist} <br/>  {this.props.album}</p>
  </div>
  <button onClick={this.addTrack}  className="Track-action"> + </button>
  <button onClick={this.removeTrack}  className="Track-action"> - </button>
